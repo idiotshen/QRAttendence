@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "1//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shen.mybatis.mappers.attendenceChart.AttendenceChartMapper">
+    <select id="selectStudentWeekStatistices" parameterType="String" resultType="com.shen.mybatis.mappers.attendenceChart.Statistics">
+        select WEEK as statisticsName, count(WEEK) as unattendenceCount FROM unattendenceDetail where STUDENTID = #{id} group by WEEK;
+    </select>
+
+    <select id="selectTeacherWeekStatistices" parameterType="String" resultType="com.shen.mybatis.mappers.attendenceChart.Statistics">
+        select WEEK as statisticsName, count(WEEK) as unattendenceCount FROM unattendenceDetail where TEACHERID = #{id} group by WEEK;
+    </select>
+
+    <select id="selectTeacherLessonStatistics" parameterType="String" resultType="com.shen.mybatis.mappers.attendenceChart.Statistics">
+        select LESSONID as statisticsName, count(LESSONID) as unattendenceCount FROM unattendenceDetail where  TEACHERID = #{id} group by LESSONID;
+    </select>
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "1//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shen.mybatis.mappers.student.StudentMapper">
+    <select id="selectUser" parameterType="String" resultType="student">
+        select
+            STUDENTID   as Id,
+            studentName as name,
+            sex,
+            CLASSID,
+            majorName   as major,
+            collegeName as college,
+            password    as password
+        from studentdetail
+        where STUDENTID = #{id};
+    </select>
+
+    <select id="validatePassword" parameterType="String" resultType="int">
+        select COUNT(*)
+        FROM STUDENT
+        WHERE STUDENTID = #{id} AND PASSWORD = #{password}
+    </select>
+
+    <select id="insertUser" parameterType="student">
+        insert into STUDENT (STUDENTID, CLASSID, NAME, SEX, PASSWORD)
+        values (#{id}, #{classId}, #{name}, #{sex}, #{password})
+    </select>
+
+    <select id="selectRowBoundsStudent" resultType="Student" parameterType="java.lang.String">
+        select STUDENTID as Id, studentName as name, sex, CLASSID, majorName as major, collegeName as college, password as password from studentdetail where 1=1
+        <if test="Id != null and Id != ''">
+            and STUDENTID = #{Id}
+        </if>
+        <if test="name != null and name != ''">
+            and studentName= #{name}
+        </if>
+        <if test="sex != null and sex != ''">
+            and SEX= #{sex}
+        </if>
+        <if test="classId != null and classId != ''">
+            and CLASSID = #{classId}
+        </if>
+        <if test="major != null and major !=''">
+            and majorName = #{major}
+        </if>
+        <if test="college != null and college != ''">
+            and collegeName= #{college}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*)
+        from studentdetail
+    </select>
+</mapper>

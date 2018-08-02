@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "1//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shen.mybatis.mappers.schedule.ScheduleMapper">
+    <select id="selectStudentSchedule" resultType="schedule">
+        select lessonid as lessonId, classid as classId, classroomid as classroomId, dday as dday, dtime as dtime, courseName as courseName, teacherName as teacherName FROM schedule where classid = #{classid}
+    </select>
+
+    <select id="selectTeacherSchedule" resultType="schedule">
+        select lessonid, classid, classroomid, dday, dtime, courseName, teacherName FROM schedule where teacherid = #{teacherid}
+    </select>
+
+    <select id="selectSchedule" resultType="schedule">
+        select lessonid, classid, classroomid, dday, dtime, courseName, teacherName FROM schedule where lessonid = #{lessonId}
+    </select>
+</mapper>

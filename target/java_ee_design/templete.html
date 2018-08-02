@@ -1,0 +1,22 @@
+<md-dialog aria-label="二维码">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>二维码</h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <span>第{{week}}周  星期{{dday}}  第{{dtime}}节课</span> <br>
+                <img style="margin: auto; max-width: 100%;" alt="Lush mango tree" ng-src="http://qr.liantu.com/api.php?text={lessonId=&quot{{lessonId}}&quot,week=&quot{{week}}&quot}">
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="answer('cancel')">
+                关闭
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "1//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shen.mybatis.mappers.admin.AdminMapper">
+    <select id="validatePassword" resultType="int" parameterType="String">
+        select COUNT(*) FROM admin WHERE user = #{Id} AND PASSWORD = #{password}
+    </select>
+</mapper>

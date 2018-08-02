@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//com.shen.mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="com.shen.model.user.Student" alias="student" />
+        <typeAlias type="com.shen.model.Schedule" alias="schedule"/>
+        <typeAlias type="com.shen.model.Unattendence" alias="unattendence"/>
+        <typeAlias type="com.shen.model.user.Teacher" alias="teacher"/>
+        <typeAlias type="com.shen.model.UnattendenceStatistics" alias="unattendenceStatistics"/>
+        <typeAlias type="com.shen.model.user.Admin" alias="admin"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="com/shen/mybatis/mappers/student/StudentMapper.xml"/>
+        <mapper resource="com/shen/mybatis/mappers/schedule/ScheduleMapper.xml"/>
+        <mapper resource="com/shen/mybatis/mappers/attendence/AttendenceMapper.xml"/>
+        <mapper resource="com/shen/mybatis/mappers/teacher/TeacherMapper.xml"/>
+        <mapper resource="com/shen/mybatis/mappers/attendenceChart/AttendenceChartMapper.xml"/>
+        <mapper resource="com/shen/mybatis/mappers/admin/AdminMapper.xml"/>
+    </mappers>
+
+</configuration>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "1//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shen.mybatis.mappers.attendence.AttendenceMapper">
+    <select id="selectStudentUnattendences" parameterType="String" resultType="unattendence">
+        SELECT studentid, lessonId, dday, classroomid, dtime, WEEK FROM unattendenceDetail where studentid = #{id};
+    </select>
+
+    <select id="selectStudentUnattendenceLessonIds" parameterType="String" resultType="String">
+        SELECT distinct LESSONID FROM unattendenceDetail where STUDENTID = #{id};
+    </select>
+
+    <select id="selectStudentUnattendenceClassroomIds" parameterType="String" resultType="String">
+        SELECT DISTINCT CLASSROOMID FROM unattendenceDetail where STUDENTID = #{id};
+    </select>
+
+    <select id="selectStudentUnattendenceDdays" parameterType="String" resultType="String">
+        SELECT DISTINCT DDAY FROM unattendenceDetail where STUDENTID = #{id};
+    </select>
+
+    <select id="selectStudentUnattendenceDtimes" parameterType="String" resultType="String">
+        SELECT DISTINCT DTIME FROM  unattendenceDetail where STUDENTID = #{id};
+    </select>
+
+    <select id="selectStudentUnattendenceWeeks" parameterType="String" resultType="String">
+        SELECT DISTINCT WEEK FROM unattendenceDetail where STUDENTID = #{id};
+    </select>
+
+    <select id="selectStudentUnattendenceStatistices" parameterType="String" resultType="unattendenceStatistics">
+        SELECT dday, dtime, count(*) as count from unattendenceDetail where STUDENTID = #{id} group by DDAY, DTIME;
+    </select>
+
+    <select id="selectTeacherUnattendences" parameterType="String" resultType="unattendence">
+        SELECT studentid, unattendenceDetail.lessonId, dday, classroomid, dtime, WEEK FROM unattendenceDetail,COURSETEACHER, COURSETABLE
+        where COURSETEACHER.TEACHERID = #{id} and COURSETABLE.COURSETEACHERID = COURSETEACHER.COURSETEACHERID AND COURSETABLE.LESSONID = unattendenceDetail.LESSONID;
+    </select>
+
+    <select id="selectTeacherUnattendenceStatistices" parameterType="String" resultType="unattendenceStatistics">
+        SELECT dday, dtime, count(*) as count FROM unattendenceDetail,COURSETEACHER, COURSETABLE
+        where COURSETEACHER.TEACHERID = #{id} and COURSETABLE.COURSETEACHERID = COURSETEACHER.COURSETEACHERID AND COURSETABLE.LESSONID = unattendenceDetail.LESSONID
+        group by DDAY, DTIME;
+    </select>
+
+    <select id="getStudentList" parameterType="String" resultType="java.lang.String">
+        select STUDENTID from schedule, STUDENT where lessonid = #{lessonId} and schedule.classid = STUDENT.CLASSID;
+    </select>
+
+    <select id="getStudentAttendence" parameterType="String" resultType="java.lang.String">
+        select week from unattendenceDetail where STUDENTID = #{Id} and LESSONID = #{lessonId}
+    </select>
+
+    <insert id="insertAttendence" parameterType="String" >
+        insert into ATTENDENCE(STUDENTID, LESSONID, WEEK) VALUES (#{studentId}, #{lessonId}, #{week});
+    </insert>
+
+</mapper>
